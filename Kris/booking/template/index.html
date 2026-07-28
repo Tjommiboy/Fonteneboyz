@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Omvising booking</title>
+        <nav>
+            <link rel="stylesheet" href="static/css/booking.css">
+            <script src="./static/script/script.js"></script>
+        </nav>
+    </head>
+    <body>
+        <div class="form-container">
+            <h1>Omvisings bestilling</h1>
+            <form id="timeDateForm">
+                <div>
+                    <form>
+                        <label for="Dato">Dato:</label>
+                        <input id="Dato" type="date"><br>
+                        <label for="Tid">Tid:</label>
+                        <input id="Tid" type="time">
+                        <button id="send-btn" onclick="dateTime()">Neste</button>
+                    </form>
+                </div>
+            </form>
+            <footer><h5><a href="/info">Mer Info</a></h5></footer>
+        </div>
+    </body>
+</html>
