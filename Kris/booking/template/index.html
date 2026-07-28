@@ -5,24 +5,21 @@
         <title>Omvising booking</title>
         <nav>
             <link rel="stylesheet" href="static/css/booking.css">
+            <script src="./static/script/script.js"></script>
         </nav>
     </head>
     <body>
         <div class="form-container">
             <h1>Omvisings bestilling</h1>
-            <form action="/kontakt_info" method="post">
-            {{ form.hidden_tag() }}
+            <form id="timeDateForm">
                 <div>
-                    <label for="dato">Dato:</label>
-                    {{ form.dato(type="date", min=today_str) }}<br><br>
-                    {% if form.dato.errors %}
-                    {% for error in form.dato.errors %}
-                        <span class="error" style="color: red;">{{ error }}</span><br>
-                    {% endfor %}
-                    {% endif %}
-                    <label for="tid">Tid:</label>
-                    {{ form.tid() }}<br><br>
-                    {{ form.submit(class="next-button") }}
+                    <form>
+                        <label for="Dato">Dato:</label>
+                        <input id="Dato" type="date"><br>
+                        <label for="Tid">Tid:</label>
+                        <input id="Tid" type="time">
+                        <button id="send-btn" onclick="dateTime()">Neste</button>
+                    </form>
                 </div>
             </form>
             <footer><h5><a href="/info">Mer Info</a></h5></footer>
