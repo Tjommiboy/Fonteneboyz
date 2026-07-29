@@ -1,0 +1,26 @@
+<html>
+  <head>
+    <link rel="stylesheet" href="index.css" />
+  </head>
+  <body>
+    <div class="container">
+      <h1>Welcome to Fontenehuset</h1>
+      <p>Click the buttons below to keep track of how many people are entering and leaving.</p>
+    <h1>People entering:</h1>
+<div>
+    <input type="text" id="person-name" placeholder="Whats your name" />   
+<button id="entering">Enter</button>
+</div>
+    <h2 id="count-el">0</h2>
+    <div>
+      <button id="increment" onclick="increment()">Increment</button>
+      <button id="decrement" onclick="decrement()" disabled>Decrement</button>
+    </div>
+    <button id="save-btn" onclick="save()">Save</button>
+    <p id="save-el"></p>
+    <h3 id="total-el">Total: 0</h3>
+    <p id="leaving-el">People leaving</p>
+    <button id="leaving" onclick="leaving()">People leaving</button>
+  </body>
+  <script src="index.js" "></script>
+</html>
