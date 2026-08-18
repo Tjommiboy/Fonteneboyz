@@ -6,7 +6,13 @@ function App() {
 
   return (
     <>
-      
+      <main>
+        <div>
+          <h1>
+            World
+          </h1>
+        </div>
+      </main>
     </>
   )
 }
