@@ -56,10 +56,10 @@ export default function DatoForm() {
   ];
 
   function pickDay(date: Date) {
-    if (date < today) return;
-
-    setSelectedDate(date);
-    setSelectedTime(null);
+    if (date < today) return(
+    setSelectedDate(date),
+    setSelectedTime(null)
+    )
   }
 
   function changeWeek(direction: number) {
