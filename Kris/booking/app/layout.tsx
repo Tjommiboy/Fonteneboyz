@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import type { ReactNode } from "react";
 import "./globals.css";
+import { Html } from "next/document";
 
 export const metadata: Metadata = {
   title: "Booking Fontenehuset Bergen",
@@ -10,9 +11,11 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html>
-      <div>
-        {children}
-      </div>
+      <body>
+        <div>
+          {children}
+        </div>
+      </body>
     </html>
   );
 }
