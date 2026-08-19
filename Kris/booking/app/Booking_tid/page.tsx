@@ -1,3 +1,5 @@
+'use client'
+
 import DatoForm  from '../../components/DatoForm/DatoForm'
 import Link from 'next/link'
 import {useRouter} from 'next/navigation'
@@ -7,8 +9,9 @@ export default function BookingTid(){
     return (
         <section>
             <DatoForm />
-            <Link href=''>Tilbake</Link>
-            <button onClick={router.back}></button>
+            <div className='bg-gray-150 hover:pointer flex aling-center'>
+                <button className='text-bold' onClick={() => router.back()}>Tilbake</button>
+            </div>
         </section>
     )
 }

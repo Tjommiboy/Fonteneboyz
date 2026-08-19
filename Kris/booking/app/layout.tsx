@@ -3,7 +3,6 @@ import type { ReactNode } from "react";
 import Link from 'next/link'
 import Image from 'next/image'
 import "./globals.css";
-import { Html } from "next/document";
 
 export const metadata: Metadata = {
   title: "Booking Fontenehuset Bergen",
@@ -21,7 +20,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
                 alt='Fontenehuset Bergen Logo'
                 width={375.9}
                 height={50}
-                className='max-w-full max-h-[50px] w-auto'
+                className='max-w-full max-h-[50px] w-auto h-auto'
                 loading='eager'
                 />
             </div>

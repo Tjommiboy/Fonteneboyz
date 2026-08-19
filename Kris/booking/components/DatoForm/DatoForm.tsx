@@ -1,12 +1,10 @@
 "use client";
 
 import { useState } from "react";
-import { useRouter } from "next/navigation";
 
 const TIMES = ["11:00", "13:00"];
 const DAY_NAMES = ["Man", "Tir", "Ons", "Tor", "Fre"];
 const MAX_WEEK_PAIRS = 4;
-const router = useRouter()
 
 function getMonday(date: Date) {
   const monday = new Date(date);
