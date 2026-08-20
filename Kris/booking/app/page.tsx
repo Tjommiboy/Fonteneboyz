@@ -10,7 +10,7 @@ export default function Home() {
           </div>
           <p></p>
           
-          <Link className='bg-orange-300 rounded-xl text-black text-bold px-4' href='/Booking_tid'>Booking</Link>
+          <Link className='bg-orange-300 rounded-xl text-black text-bold px-4' href='/booking_tid'>Booking</Link>
         </div>
       </main>
   );

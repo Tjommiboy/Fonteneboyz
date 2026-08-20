@@ -18,10 +18,10 @@ export default function RootLayout({ children }: { children: ReactNode }) {
               <Image 
                 src='/Logoer/FHB_logo_horisontal.png'
                 alt='Fontenehuset Bergen Logo'
-                width={375.9}
+                width={376}
                 height={50}
-                className='max-w-full max-h-[50px] w-auto h-auto'
-                loading='eager'
+                className='h-[50px] w-auto'
+                priority
                 />
             </div>
             <div className='flex items-center bg-[#ee7035] px-4 border-b-3 border-l-3'>

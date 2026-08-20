@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import WeekNumber from "@/utils/weekNumber";
 
 const TIMES = ["11:00", "13:00"];
 const DAY_NAMES = ["Man", "Tir", "Ons", "Tor", "Fre"];
@@ -56,10 +57,12 @@ export default function DatoForm() {
   ];
 
   function pickDay(date: Date) {
-    if (date < today) return(
-    setSelectedDate(date),
-    setSelectedTime(null)
-    )
+    if (date < today) {
+      return;
+    } else {
+      setSelectedDate(date)
+      setSelectedTime(null)
+    }
   }
 
   function changeWeek(direction: number) {
@@ -75,6 +78,9 @@ export default function DatoForm() {
   return (
     <div className="mx-auto max-w-md">
 
+      <div className="flex justify-center">
+        Velg dato
+      </div>
       {/* Kalender-header */}
       <div className="flex items-center justify-between">
         <button
@@ -84,7 +90,7 @@ export default function DatoForm() {
           ←
         </button>
 
-        <h2>Velg dato</h2>
+        <h2>Velg {WeekNumber()}</h2>
 
         <button
           onClick={() => changeWeek(1)}
