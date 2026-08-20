@@ -1,11 +1,12 @@
 "use client";
 
 import { useState } from "react";
-import WeekNumber from "@/utils/weekNumber";
+import { getISODay, getISOWeek, format} from "date-fns";
+import { nb } from "date-fns/locale";
 
 const TIMES = ["11:00", "13:00"];
 const DAY_NAMES = ["Man", "Tir", "Ons", "Tor", "Fre"];
-const MAX_WEEK_PAIRS = 4;
+const MAX_WEEK = 8;
 
 function getMonday(date: Date) {
   const monday = new Date(date);
@@ -49,30 +50,39 @@ export default function DatoForm() {
   const [selectedTime, setSelectedTime] = useState<string | null>(null);
   const [confirmed, setConfirmed] = useState(false);
 
-  const pairStart = addDays(thisMonday, weekPair * 14);
+  const pairStart = addDays(thisMonday, weekPair * 7);
+  const month = format(pairStart, 'MMMM', {locale: nb})
+  const weekNumber = getISOWeek(pairStart)
+  const day = getISODay(today) 
 
-  const weeks = [
-    Array.from({ length: 5 }, (_, i) => addDays(pairStart, i)),
-    Array.from({ length: 5 }, (_, i) => addDays(pairStart, i + 7)),
-  ];
+  const week = Array.from({ length: 5 }, (_, i) => addDays(pairStart, i));
 
   function pickDay(date: Date) {
     if (date < today) {
       return;
+    } else if (selectedDate && isSameDay(date, selectedDate)) {
+      setSelectedDate(null);
+      setSelectedTime(null);
     } else {
-      setSelectedDate(date)
-      setSelectedTime(null)
+      setSelectedDate(date);
+      setSelectedTime(null);
     }
   }
 
   function changeWeek(direction: number) {
     const newWeekPair = weekPair + direction;
 
-    if (newWeekPair < 0 || newWeekPair >= MAX_WEEK_PAIRS) return;
+    if (newWeekPair < 0 || newWeekPair >= MAX_WEEK) return;
 
     setWeekPair(newWeekPair);
     setSelectedDate(null);
     setSelectedTime(null);
+  }
+
+  function bekreft(){
+    if (confirmed === true) {
+      return 
+    }
   }
 
   return (
@@ -90,11 +100,11 @@ export default function DatoForm() {
           ←
         </button>
 
-        <h2>Velg {WeekNumber()}</h2>
+        <h2>Uke {weekNumber} i {month.charAt(0).toUpperCase() + month.slice(1)}</h2>
 
         <button
           onClick={() => changeWeek(1)}
-          disabled={weekPair === MAX_WEEK_PAIRS - 1}
+          disabled={weekPair === MAX_WEEK - 1}
         >
           →
         </button>
@@ -109,9 +119,8 @@ export default function DatoForm() {
         ))}
       </div>
 
-      {/* To uker */}
-      {weeks.map((week, weekIndex) => (
-        <div key={weekIndex} className="grid grid-cols-5">
+      {/* One uker */}
+        <div className="grid grid-cols-5">
           {week.map((date) => {
             const isPast = date < today;
             const isSelected =
@@ -123,6 +132,7 @@ export default function DatoForm() {
                 disabled={isPast}
                 onClick={() => pickDay(date)}
                 className={`
+                  cursor-pointer
                   p-3
                   disabled:text-gray-300
                   ${isSelected ? "bg-blue-500 text-white" : ""}
@@ -132,8 +142,7 @@ export default function DatoForm() {
               </button>
             );
           })}
-        </div>
-      ))}
+        </div>      
 
       {/* Valgt dato */}
       {selectedDate && (
@@ -147,6 +156,7 @@ export default function DatoForm() {
                 key={time}
                 onClick={() => setSelectedTime(time)}
                 className={`
+                  cursor-pointer
                   border p-3
                   ${selectedTime === time ? "bg-blue-500 text-white" : ""}
                 `}

@@ -3,9 +3,9 @@ import Link from "next/link";
 
 export default function Home() {
   return (
-      <main>
-        <div className='m-auto flex-row justify-center'>
-          <div className=''>
+      <main className="flex justify-center">
+        <div className=''>
+          <div className='mb-5'>
             <h1>Velkommen til Omvising</h1>
           </div>
           <p></p>

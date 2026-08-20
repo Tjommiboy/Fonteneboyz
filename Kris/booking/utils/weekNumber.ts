@@ -1,7 +1,6 @@
 import { getISOWeek } from "date-fns";
 
-export default function WeekNumber() {
-    const today = new Date()
-    const weekNumber = getISOWeek(today)
+export default function WeekNumber(date: Date) {
+    const weekNumber = getISOWeek(date)
      return weekNumber
 }
