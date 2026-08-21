@@ -8,6 +8,9 @@ export default function BookingTid(){
     return (
         <section className='flex-row justify-center items-center space-y-10 mt-10'>
             <div className=''>
+                <div className='flex justify-center'>
+                    <h1>Velg dato og tid</h1>
+                </div>
                 <div className='mx-auto w-full'>
                     <DatoForm />
                 </div>

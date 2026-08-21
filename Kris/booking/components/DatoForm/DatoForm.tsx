@@ -33,6 +33,10 @@ function isSameDay(a: Date, b: Date) {
   return a.toDateString() === b.toDateString();
 }
 
+function formatMåndeÅr(d: Date){
+  return d.toLocaleDateString('nb-NO', {month: 'long', year: 'numeric'})
+}
+
 function formatDate(date: Date) {
   return date.toLocaleDateString("nb-NO", {
     weekday: "long",
@@ -55,12 +59,14 @@ export default function DatoForm() {
   const {setBooking} = useBooking();
 
   const pairStart = addDays(thisMonday, weekPair * 7);
-  const month = format(pairStart, 'MMMM', {locale: nb})
+  const month = format(pairStart, 'MMMM yyyy', {locale: nb})
   const weekNumber = getISOWeek(pairStart)
-   
-
   
   const week = Array.from({ length: 5 }, (_, i) => addDays(pairStart, i));
+
+  const firstDay = week[0]
+  const lastDay = week[4]
+  const måndeLabel = firstDay.getMonth() === lastDay.getMonth() ? formatMåndeÅr(firstDay) : `${firstDay.toLocaleDateString('nb-NO', {month: 'long'})} - ${formatMåndeÅr(lastDay)}`
 
   function pickDay(date: Date) {
     if (date < today) {
@@ -97,29 +103,25 @@ export default function DatoForm() {
   }
 
   return (
-    <div className="mx-auto max-w-md">
-
-      <div className="flex justify-center mb-5">
-        Velg dato
-      </div>
+    <div className="mx-auto max-w-md border rounded-xl border-gray-300 mt-5">
       {/* Kalender-header */}
-      <div className="flex items-center justify-between">
+      <div className="flex items-center justify-around m">
         <button
-          className="cursor-pointer disabled:cursor-not-allowed disabled:text-gray-300"
+          className="w-8 h-8 rounded-md border cursor-pointer disabled:cursor-not-allowed disabled:text-gray-300"
           onClick={() => changeWeek(-1)}
           disabled={weekPair === startWeek}
         >
-          ←
+          {'<'}
         </button>
 
-        <h2>Uke {weekNumber} i {month.charAt(0).toUpperCase() + month.slice(1)}</h2>
+        <h2>{måndeLabel}</h2>
 
         <button
-          className="cursor-pointer"
+          className="cursor-pointer border rounded-md h-8 w-8 disabled:cursor-not-allowed disabled:text-gray-300"
           onClick={() => changeWeek(1)}
           disabled={weekPair === MAX_WEEK - 1}
         >
-          →
+          {'>'}
         </button>
       </div>
 
@@ -188,7 +190,7 @@ export default function DatoForm() {
           onClick={bekreft}
           className="mt-6 w-full bg-blue-500 p-3 text-white cursor-pointer"
         >
-          Bekreft booking
+          Neste
         </button>
       )}
 
