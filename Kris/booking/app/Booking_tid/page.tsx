@@ -6,7 +6,7 @@ import {useRouter} from 'next/navigation'
 export default function BookingTid(){
     const router = useRouter()
     return (
-        <section>
+        <section className='flex-row justify-center items-center space-y-10 mt-10'>
             <div className=''>
                 <div className='mx-auto w-full'>
                     <DatoForm />

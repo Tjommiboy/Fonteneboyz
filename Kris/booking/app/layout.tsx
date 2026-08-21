@@ -13,7 +13,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html>
       <body>
-          <header className='flex'>
+          <header className='flex border-b-1'>
             <div className='w-full py-[1vw] px-[var(--pagePadding)]'>
               <Image 
                 src='/Logoer/FHB_logo_horisontal.png'

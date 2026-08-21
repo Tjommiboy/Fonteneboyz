@@ -88,12 +88,13 @@ export default function DatoForm() {
   return (
     <div className="mx-auto max-w-md">
 
-      <div className="flex justify-center">
+      <div className="flex justify-center mb-5">
         Velg dato
       </div>
       {/* Kalender-header */}
       <div className="flex items-center justify-between">
         <button
+          className="cursor-pointer"
           onClick={() => changeWeek(-1)}
           disabled={weekPair === 0}
         >
@@ -103,6 +104,7 @@ export default function DatoForm() {
         <h2>Uke {weekNumber} i {month.charAt(0).toUpperCase() + month.slice(1)}</h2>
 
         <button
+          className="cursor-pointer"
           onClick={() => changeWeek(1)}
           disabled={weekPair === MAX_WEEK - 1}
         >
