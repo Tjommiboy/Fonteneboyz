@@ -13,7 +13,7 @@ export default function BookingBekreftelse() {
             <p>Navn: {booking.name}</p>
             <p>Mobil: {booking.mobil}</p>
             <p>Email: {booking.email}</p>
-            <p>Dato: {booking.valgtDato?.toLocaleString()}</p>
+            <p>Dato: {booking.valgtDato ? new Date(booking.valgtDato).toLocaleDateString("nb-NO", { day: "numeric", month: "long" }) : "-"}</p>
             <p>Tid: {booking.valgtTid}</p>
             <p>Melding: {booking.message}</p>
         </>

@@ -29,7 +29,7 @@ export default function KontaktSide() {
                                 name: e.target.value
                             }))
                         }}
-                        required
+                        
                     />
                 </div>
                 
