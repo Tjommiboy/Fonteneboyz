@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { getISODay, getISOWeek, format} from "date-fns";
 import { nb } from "date-fns/locale";
+import { useRouter } from "next/navigation"; 
 
 const TIMES = ["11:00", "13:00"];
 const DAY_NAMES = ["Man", "Tir", "Ons", "Tor", "Fre"];
@@ -44,11 +45,10 @@ export default function DatoForm() {
   today.setHours(0, 0, 0, 0);
 
   const thisMonday = getMonday(today);
-
+  const router = useRouter()
   const [weekPair, setWeekPair] = useState(0);
   const [selectedDate, setSelectedDate] = useState<Date | null>(null);
   const [selectedTime, setSelectedTime] = useState<string | null>(null);
-  const [confirmed, setConfirmed] = useState(false);
 
   const pairStart = addDays(thisMonday, weekPair * 7);
   const month = format(pairStart, 'MMMM', {locale: nb})
@@ -80,9 +80,8 @@ export default function DatoForm() {
   }
 
   function bekreft(){
-    if (confirmed === true) {
-      return 
-    }
+    if (!selectedDate || !selectedTime) return;
+      router.push('/booking_tid/booking_bekreftelse');
   }
 
   return (
@@ -124,7 +123,7 @@ export default function DatoForm() {
       {/* One uker */}
         <div className="grid grid-cols-5">
           {week.map((date) => {
-            const isPast = date < today;
+            const isPast = date <= today;
             const isSelected =
               selectedDate && isSameDay(date, selectedDate);
 
@@ -137,6 +136,7 @@ export default function DatoForm() {
                   cursor-pointer
                   p-3
                   disabled:text-gray-300
+                  disabled:cursor-not-allowed
                   ${isSelected ? "bg-blue-500 text-white" : ""}
                 `}
               >
@@ -173,8 +173,8 @@ export default function DatoForm() {
       {/* Bekreft */}
       {selectedDate && selectedTime && (
         <button
-          onClick={() => setConfirmed(true)}
-          className="mt-6 w-full bg-blue-500 p-3 text-white"
+          onClick={bekreft}
+          className="mt-6 w-full bg-blue-500 p-3 text-white cursor-pointer"
         >
           Bekreft booking
         </button>
