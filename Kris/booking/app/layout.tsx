@@ -13,8 +13,8 @@ export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html>
       <body>
-          <header className='flex border-b-1'>
-            <div className='w-full py-[1vw] px-[var(--pagePadding)]'>
+          <header className='flex border-b-1 justify-between opacity-100 transition-opacity duration-1000 starting:opacity-0'>
+            <div className=''>
               <Image 
                 src='/Logoer/FHB_logo_horisontal.png'
                 alt='Fontenehuset Bergen Logo'
@@ -24,8 +24,8 @@ export default function RootLayout({ children }: { children: ReactNode }) {
                 priority
                 />
             </div>
-            <div className='flex items-center bg-[#ee7035] px-4 border-b-3 border-l-3'>
-              <a className='text-xl' href='https://www.fontenehusetbergen.no'>Hjemmeside</a>
+            <div className='flex items-center justify-center bg-[#ee7035] px-7 border-b-3 border-l-3'>
+              <a className='text-xl whitespace-nowrap' href='https://www.fontenehusetbergen.no'>Til Hjemmeside</a>
             </div>
           </header>
         <div>

@@ -1,14 +1,21 @@
-export default function bookingbekreftelse(){
+'use client'
+
+import { useBooking } from "@/components/BookingContext/BookingContext"
+
+
+export default function BookingBekreftelse() {
+    const {booking} = useBooking()
     return (
         <>
             <h1>
                 Din bestilling er sendt
             </h1>
-            <p>Navn: {}</p>
-            <p>Mobil: {}</p>
-            <p>Dato: {}</p>
-            <p>Tid: {}</p>
-            <p>Melding: {}</p>
+            <p>Navn: {booking.name}</p>
+            <p>Mobil: {booking.mobil}</p>
+            <p>Email: {booking.email}</p>
+            <p>Dato: {booking.valgtDato?.toLocaleString()}</p>
+            <p>Tid: {booking.valgtTid}</p>
+            <p>Melding: {booking.message}</p>
         </>
     )
 }
