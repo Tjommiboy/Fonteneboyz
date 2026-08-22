@@ -1,8 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { getISODay, getISOWeek, format} from "date-fns";
-import { nb } from "date-fns/locale";
+import { getISODay} from "date-fns";
 import { useRouter } from "next/navigation";
 import { useBooking } from "@/components/BookingContext/BookingContext";
 
@@ -65,8 +64,6 @@ export default function DatoForm() {
   const [bookedTimes, setBookedTimes] = useState<BookingTime[]>([])
 
   const pairStart = addDays(thisMonday, weekPair * 7);
-  const month = format(pairStart, 'MMMM yyyy', {locale: nb})
-  const weekNumber = getISOWeek(pairStart)
   
   const week = Array.from({ length: 5 }, (_, i) => addDays(pairStart, i));
 
@@ -161,10 +158,19 @@ export default function DatoForm() {
             const isSelected =
               selectedDate && isSameDay(date, selectedDate);
 
+            const dateString = date.toLocaleDateString('sv-SE');
+
+            const isFullyBooked = TIMES.every((time) => 
+              bookedTimes.some(
+                (booking) =>
+                  booking.date === dateString &&
+                  booking.time === time
+              ))
+
             return (
               <button
                 key={date.toISOString()}
-                disabled={isPast}
+                disabled={isPast || isFullyBooked}
                 onClick={() => pickDay(date)}
                 className={`
                   cursor-pointer
@@ -187,19 +193,29 @@ export default function DatoForm() {
 
           {/* Tid */}
           <div className="mt-3 flex gap-3">
-            {TIMES.map((time) => (
-              <button
-                key={time}
-                onClick={() => setSelectedTime(time)}
-                className={`
-                  cursor-pointer
-                  border p-3
-                  ${selectedTime === time ? "bg-blue-500 text-white" : ""}
-                `}
-              >
-                {time}
-              </button>
-            ))}
+            {TIMES.map((time) => {
+              const selectedDateString = selectedDate?.toLocaleDateString('sv-SE');
+
+              const isBooked = bookedTimes.some(
+                (booking) =>
+                  booking.date === selectedDateString &&
+                  booking.time === time
+              );
+
+              return(
+                <button
+                  key={time}
+                  disabled={isBooked}
+                  onClick={() => setSelectedTime(time)}
+                  className={`
+                    border p-3
+                    ${selectedTime === time ? "bg-blue-500 text-white" : ""}
+                    ${isBooked ? 'bg-gray-200 text-gray-400 cursor-not-allowed' : 'cursor-pointer'}
+                  `}
+                >
+                  {time}
+                </button>
+            )})}
           </div>
         </div>
       )}
