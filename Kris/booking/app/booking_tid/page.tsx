@@ -6,8 +6,11 @@ import {useRouter} from 'next/navigation'
 export default function BookingTid(){
     const router = useRouter()
     return (
-        <section>
+        <section className='flex-row justify-center items-center space-y-10 mt-10'>
             <div className=''>
+                <div className='flex justify-center'>
+                    <h1>Velg dato og tid</h1>
+                </div>
                 <div className='mx-auto w-full'>
                     <DatoForm />
                 </div>

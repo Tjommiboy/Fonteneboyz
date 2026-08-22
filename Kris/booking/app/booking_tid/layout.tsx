@@ -1,5 +1,6 @@
 import { ReactNode } from "react";
 import { Metadata } from "next";
+import { BookingProvider } from "@/components/BookingContext/BookingContext";
 
 export const metadata: Metadata = {
     title: 'Booking Dato og Tid',
@@ -9,9 +10,9 @@ export const metadata: Metadata = {
 export default function BookingPage({children}: {children: ReactNode}){
     return (
         <main>
-            <div>
+            <BookingProvider>
                 {children}
-            </div>
+            </BookingProvider>
         </main>
     )
 }

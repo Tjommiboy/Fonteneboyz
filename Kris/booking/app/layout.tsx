@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import type { ReactNode } from "react";
-import Link from 'next/link'
 import Image from 'next/image'
 import "./globals.css";
 
@@ -12,20 +11,22 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html>
-      <body>
-          <header className='flex'>
-            <div className='w-full py-[1vw] px-[var(--pagePadding)]'>
+      <body className="">
+          <header className='flex flex-col items-center sm:flex-row justify-between opacity-100 transition-opacity duration-1000 starting:opacity-0'>
+            <div className='flex justify-center'>
               <Image 
                 src='/Logoer/FHB_logo_horisontal.png'
                 alt='Fontenehuset Bergen Logo'
                 width={376}
                 height={50}
-                className='h-[50px] w-auto'
+                className='h-12.5 w-auto'
                 priority
                 />
             </div>
-            <div className='flex items-center bg-[#ee7035] px-4 border-b-3 border-l-3'>
-              <a className='text-xl' href='https://www.fontenehusetbergen.no'>Hjemmeside</a>
+            <div className="flex sm:flex-none justify-center sm:">
+              <div className='flex items-center justify-center rounded-md sm:rounded-none p-1 bg-[#ee7035] sm:p-3 sm:px-7 sm:border-b-3 sm:border-l-3'>
+                <a className='text-xl whitespace-nowrap' href='https://www.fontenehusetbergen.no'>Til Hjemmeside</a>
+              </div>
             </div>
           </header>
         <div>
