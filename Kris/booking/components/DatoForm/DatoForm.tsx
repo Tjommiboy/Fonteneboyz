@@ -1,10 +1,15 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { getISODay, getISOWeek, format} from "date-fns";
 import { nb } from "date-fns/locale";
 import { useRouter } from "next/navigation";
 import { useBooking } from "@/components/BookingContext/BookingContext";
+
+type BookingTime = {
+  date: string;
+  time: string;
+}
 
 const TIMES = ["11:00", "13:00"];
 const DAY_NAMES = ["Man", "Tir", "Ons", "Tor", "Fre"];
@@ -57,6 +62,7 @@ export default function DatoForm() {
   const [selectedDate, setSelectedDate] = useState<Date | null>(null);
   const [selectedTime, setSelectedTime] = useState<string | null>(null);
   const {setBooking} = useBooking();
+  const [bookedTimes, setBookedTimes] = useState<BookingTime[]>([])
 
   const pairStart = addDays(thisMonday, weekPair * 7);
   const month = format(pairStart, 'MMMM yyyy', {locale: nb})
@@ -101,6 +107,20 @@ export default function DatoForm() {
 
       router.push('/booking_tid/booking_kontakt');
   }
+
+  useEffect(() => {
+    async function getBookedTimes() {
+      const response = await fetch('/api/booking/available');
+
+      const data =  await response.json();
+
+      setBookedTimes(data)
+
+      console.log('Opptatte tider:', data)
+    }
+
+    getBookedTimes();
+  }, []);
 
   return (
     <div className="mx-auto max-w-md border rounded-xl border-gray-300 mt-5">
