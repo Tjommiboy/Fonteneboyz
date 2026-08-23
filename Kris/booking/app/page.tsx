@@ -1,4 +1,3 @@
-import Image from "next/image";
 import Link from "next/link";
 
 export default function Home() {
@@ -15,7 +14,7 @@ export default function Home() {
           </div>
           <div className="">
             <p className="font-serif">
-              Kom gjerne på en uforpliktende omvisning på huset vårt for å se hvordan det ser ut her hos oss, hva vi driver med og hils på noen av oss som jobber her. 
+              Kom gjerne på en uforpliktende omvisning på huset vårt for å se hvordan det ser ut her hos oss, hva vi driver med og hils på noen av oss som jobber her. <br/>
               Omvisninger varer som regel 30 min og inkluderer en liten runde på huset for å se de ulike enhetene og en liten prat over en kaffekopp.
             </p>
           </div>

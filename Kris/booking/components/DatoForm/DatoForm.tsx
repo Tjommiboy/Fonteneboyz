@@ -54,13 +54,17 @@ export default function DatoForm() {
   today.setHours(0, 0, 0, 0);
   const day = getISODay(today)
   const startWeek = day >= 5 ? 1 : 0
+  const {booking, setBooking} = useBooking();
 
   const thisMonday = getMonday(today);
   const router = useRouter()
   const [weekPair, setWeekPair] = useState(startWeek);
-  const [selectedDate, setSelectedDate] = useState<Date | null>(null);
-  const [selectedTime, setSelectedTime] = useState<string | null>(null);
-  const {setBooking} = useBooking();
+  const [selectedDate, setSelectedDate] = useState<Date | null>(
+    booking.valgtDato ? new Date(booking.valgtDato) : null
+  );
+  const [selectedTime, setSelectedTime] = useState<string | null>(
+    booking.valgtTid
+  );
   const [bookedTimes, setBookedTimes] = useState<BookingTime[]>([])
 
   const pairStart = addDays(thisMonday, weekPair * 7);
