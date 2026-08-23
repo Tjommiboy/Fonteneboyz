@@ -15,8 +15,8 @@ export default function KontaktSide() {
 
     return (
         <div className="flex justify-center">
-            <form onSubmit={submit} className="bg-red-300 p-3 w-80 space-y-4">
-                <div className="bg-blue-300 ">
+            <form onSubmit={submit} className=" p-3 w-80 space-y-4">
+                <div className=" ">
                     <label htmlFor="name">Navn: </label>
                     <input
                         id="name"
@@ -64,6 +64,37 @@ export default function KontaktSide() {
                         }}
                     />
                 </div>
+                <fieldset className="flex ">
+                    <legend>Jeg bestiller omvising for:</legend>
+                    <label>
+                        <input
+                            type="radio"
+                            name="bestillerFor"
+                            checked={booking.bestillerFor === "megSelv"}
+                            onChange={() =>
+                            setBooking((prev) => ({
+                                ...prev,
+                                bestillerFor: "megSelv",
+                            }))
+                            }
+                        />
+                        Meg selv
+                    </label>
+                    <label>
+                    <input
+                        type="radio"
+                        name="bestillerFor"
+                        checked={booking.bestillerFor === "andre"}
+                        onChange={() =>
+                        setBooking((prev) => ({
+                            ...prev,
+                            bestillerFor: "andre",
+                        }))
+                        }
+                    />
+                        Noen andre (skriv fornavn i kommentarfeltet under)
+                    </label>
+                </fieldset>
                 <div>
                     <label htmlFor="message">Melding: </label>
                     <textarea
@@ -82,6 +113,9 @@ export default function KontaktSide() {
                     <button className="" type="submit">Neste</button>
                 </div>
             </form>
+            <div>
+                <button onClick={() => router.push('/booking_tid')}>Tilbake</button>
+            </div>
         </div>
     )
 }

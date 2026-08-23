@@ -8,6 +8,7 @@ type BookingData = {
     name: string;
     email: string;
     mobil: string;
+    bestillerFor: 'megSelv' | 'andre'
     message: string;
 }
 
@@ -25,6 +26,7 @@ export function BookingProvider({children}: {children: ReactNode}) {
         name: '',
         email: '',
         mobil: '',
+        bestillerFor: 'megSelv',
         message: ''
     });
 
