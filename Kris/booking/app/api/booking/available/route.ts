@@ -17,7 +17,7 @@ export async function GET() {
     });
 
     const bookings = response.data.items?.filter(
-        (event) => event.summary?.toLocaleLowerCase() === 'booking'
+        (event) => event.summary?.toLowerCase().includes('booking')
     );
 
     const availableBookings = bookings?.map((event) => {
